@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfoTech News - Inicio</title>
+  <!-- Tailwind CSS vía CDN para estilos rápidos -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Encabezado y Menú de Navegación -->
+  <header class="bg-blue-900 text-white p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">InfoTech News</h1>
+      <nav class="space-x-4">
+        <a href="index.html" class="hover:underline font-semibold">Inicio</a>
+        <a href="noticias.html" class="hover:underline">Noticias</a>
+        <a href="favoritos.html" class="hover:underline">Favoritos</a>
+        <a href="contacto.html" class="hover:underline">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Bienvenida / Banner -->
+  <section class="bg-blue-800 text-white py-12 text-center">
+    <h2 class="text-4xl font-extrabold">El portal del mañana, hoy</h2>
+    <p class="mt-2 text-lg">Tu fuente de periodismo tecnológico, ciencia e innovación.</p>
+  </section>
+
+  <!-- Contenedor donde se cargarán las noticias -->
+  <main class="container mx-auto my-8 p-4">
+    <h3 class="text-2xl font-bold mb-6">Noticias Destacadas</h3>
+    <div id="contenedor-noticias" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Se llenará automáticamente con JS -->
+    </div>
+  </main>
+
+  <footer class="bg-blue-900 text-white text-center p-4 mt-8">
+    <p>&copy; 2026 InfoTech News - Subgrupo 23</p>
+  </footer>
+
+  <!-- Script para cargar datos dinámicamente -->
+  <script>
+    fetch('news.json')
+      .then(response => response.json())
+      .then(data => {
+        const contenedor = document.getElementById('contenedor-noticias');
+        data.forEach(noticia => {
+          contenedor.innerHTML += `
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="${noticia.imagen}" alt="${noticia.titulo}" class="w-full h-48 object-cover">
+              <div class="p-4">
+                <span class="text-xs font-bold text-blue-600 uppercase">${noticia.categoria}</span>
+                <h4 class="text-xl font-bold mt-1">${noticia.titulo}</h4>
+                <p class="text-gray-600 mt-2 text-sm">${noticia.resumen}</p>
+                <button onclick="guardarFavorito(${noticia.id})" class="mt-4 bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600">
+                  ⭐ Agregar a Favoritos
+                </button>
+              </div>
+            </div>
+          `;
+        });
+      });
+
+    function guardarFavorito(id) {
+      let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+      if (!favs.includes(id)) {
+        favs.push(id);
+        localStorage.setItem('favoritos', JSON.stringify(favs));
+        alert('¡Noticia guardada en favoritos!');
+      } else {
+        alert('Esta noticia ya está en tus favoritos.');
+      }
+    }
+  </script>
+</body>
+</html>

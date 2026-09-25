@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "titulo": "La supremacía cuántica alcanza una nueva frontera",
+    "categoria": "Tecnología",
+    "resumen": "Un equipo internacional de científicos presenta la arquitectura de procesadores cuánticos.",
+    "contenido": "Detalles completos sobre la computación cuántica y su impacto en el procesamiento de datos masivos a nivel global.",
+    "imagen": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb"
+  },
+  {
+    "id": 2,
+    "titulo": "Inteligencia artificial en las aulas",
+    "categoria": "Educación",
+    "resumen": "Personalizando la educación del futuro con herramientas dinámicas e interactivas.",
+    "contenido": "Estudios demuestran un incremento significativo en el rendimiento escolar tras la adopción de IA adaptable.",
+    "imagen": "https://images.unsplash.com/photo-1509062522246-3755977927d7"
+  }
+]
