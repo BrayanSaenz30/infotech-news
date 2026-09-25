@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>InfoTech News - Catálogo de Noticias</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+  <!-- Header -->
+  <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <div class="bg-blue-600 text-white font-bold text-lg px-2.5 py-1 rounded">ITN</div>
+        <h1 class="text-xl font-bold tracking-tight">InfoTech <span class="text-blue-500">News</span></h1>
+      </div>
+      <nav class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="index.html" class="text-gray-300 hover:text-white transition">Inicio</a>
+        <a href="noticias.html" class="text-white font-semibold border-b-2 border-blue-500 pb-1">Noticias</a>
+        <a href="noticias.html?cat=TECNOLOGÍA" class="text-gray-300 hover:text-white transition">Tecnología</a>
+        <a href="favoritos.html" class="text-gray-300 hover:text-white transition">Favoritos</a>
+        <a href="contacto.html" class="text-gray-300 hover:text-white transition">Contacto</a>
+      </nav>
+      <div class="flex items-center space-x-4 text-gray-300">
+        <button><i class="fas fa-search"></i></button>
+        <button><i class="far fa-bookmark"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Miga de Pan / Banner del Catálogo -->
+  <div class="bg-white border-b py-6">
+    <div class="container mx-auto px-6">
+      <div class="text-xs text-gray-400 mb-2">Inicio &gt; Noticias &gt; <span class="text-gray-600">Catálogo</span></div>
+      <h2 class="text-3xl font-bold text-slate-900">Catálogo de Noticias</h2>
+    </div>
+  </div>
+
+  <!-- Filtros y Buscador -->
+  <main class="container mx-auto px-6 py-8">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+      <!-- Botones de Categoría -->
+      <div id="filtros" class="flex flex-wrap gap-2 text-xs font-semibold">
+        <button onclick="filtrar('TODAS')" class="btn-cat bg-blue-600 text-white px-4 py-2 rounded-lg">Todas</button>
+        <button onclick="filtrar('TECNOLOGÍA')" class="btn-cat bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Tecnología</button>
+        <button onclick="filtrar('EDUCACIÓN')" class="btn-cat bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Educación</button>
+        <button onclick="filtrar('COMERCIAL')" class="btn-cat bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Comercial</button>
+        <button onclick="filtrar('TURISMO')" class="btn-cat bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Turismo</button>
+      </div>
+
+      <!-- Buscador -->
+      <div class="relative w-full md:w-64">
+        <input type="text" id="buscador" placeholder="Buscar noticias..." onkeyup="buscarNoticias()"
+               class="w-full bg-white border rounded-lg pl-9 pr-4 py-2 text-xs focus:outline-none focus:border-blue-500">
+        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-xs"></i>
+      </div>
+    </div>
+
+    <!-- Grid de Noticias -->
+    <div id="contenedor-catalogo" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Se llena dinámicamente -->
+    </div>
+  </main>
+
+  <script>
+    let todasLasNoticias = [];
+
+    fetch('news.json')
+      .then(res => res.json())
+      .then(data => {
+        todasLasNoticias = data;
+        renderizar(todasLasNoticias);
+      });
+
+    function renderizar(noticias) {
+      const contenedor = document.getElementById('contenedor-catalogo');
+      contenedor.innerHTML = '';
+      noticias.forEach(noticia => {
+        contenedor.innerHTML += `
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col justify-between">
+            <div>
+              <img src="${noticia.imagen}" alt="${noticia.titulo}" class="w-full h-48 object-cover">
+              <div class="p-5">
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">${noticia.categoria}</span>
+                <h4 class="text-base font-bold text-slate-900 mt-2 leading-snug">${noticia.titulo}</h4>
+                <p class="text-gray-600 text-xs mt-2 leading-relaxed">${noticia.resumen}</p>
+              </div>
+            </div>
+            <div class="p-5 pt-0">
+              <p class="text-gray-400 text-xs mb-3">${noticia.tiempo}</p>
+              <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                <button onclick="guardarFavorito(${noticia.id})" class="text-gray-400 hover:text-yellow-500 text-xs transition">
+                  <i class="far fa-bookmark mr-1"></i> Favoritos
+                </button>
+                <a href="detalle.html?id=${noticia.id}" class="text-blue-600 font-semibold text-xs hover:underline">
+                  Ver más &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function filtrar(cat) {
+      if (cat === 'TODAS') {
+        renderizar(todasLasNoticias);
+      } else {
+        const filtradas = todasLasNoticias.filter(n => n.categoria === cat);
+        renderizar(filtradas);
+      }
+    }
+
+    function buscarNoticias() {
+      const texto = document.getElementById('buscador').value.toLowerCase();
+      const resultado = todasLasNoticias.filter(n => 
+        n.titulo.toLowerCase().includes(texto) || n.resumen.toLowerCase().includes(texto)
+      );
+      renderizar(resultado);
+    }
+
+    function guardarFavorito(id) {
+      let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+      if (!favs.includes(id)) {
+        favs.push(id);
+        localStorage.setItem('favoritos', JSON.stringify(favs));
+        alert('Noticia guardada en Favoritos');
+      } else {
+        alert('Esta noticia ya está en tus favoritos');
+      }
+    }
+  </script>
+</body>
+</html>
