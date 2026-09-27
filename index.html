@@ -3,160 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal de noticias de tecnología, ciencia, educación, comercio y turismo.">
   <title>InfoTech News - Inicio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
+  <a href="#contenido" class="itn-salto-contenido">Saltar al contenido principal</a>
 
-  <!-- Header principal -->
+  <!-- Encabezado principal: logotipo, menú de navegación y accesos rápidos -->
   <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <div class="bg-blue-600 text-white font-bold text-lg px-2.5 py-1 rounded">ITN</div>
-        <h1 class="text-xl font-bold tracking-tight">InfoTech <span class="text-blue-500">News</span></h1>
-      </div>
-      <nav class="hidden md:flex space-x-8 text-sm font-medium">
-        <a href="index.html" class="text-white font-semibold border-b-2 border-blue-500 pb-1">Inicio</a>
-        <a href="noticias.html" class="text-gray-300 hover:text-white transition">Noticias</a>
-        <a href="noticias.html?cat=TECNOLOGÍA" class="text-gray-300 hover:text-white transition">Tecnología</a>
-        <a href="favoritos.html" class="text-gray-300 hover:text-white transition">Favoritos</a>
-        <a href="contacto.html" class="text-gray-300 hover:text-white transition">Contacto</a>
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center gap-4">
+      <a href="index.html" class="flex items-center space-x-3 shrink-0">
+        <span class="bg-blue-600 text-white font-bold text-lg px-2.5 py-1 rounded">ITN</span>
+        <span class="text-xl font-bold tracking-tight">InfoTech <span class="text-blue-500">News</span></span>
+      </a>
+      <nav id="itn-menu" class="hidden md:flex flex-col md:flex-row absolute md:static top-full left-0 right-0 bg-slate-900 md:bg-transparent border-b md:border-0 border-slate-800 px-6 md:px-0 py-4 md:py-0 space-y-3 md:space-y-0 md:space-x-6 text-sm font-medium" aria-label="Navegación principal">
+        <a href="index.html" data-nav="index.html" class="text-gray-300 hover:text-white transition">Inicio</a>
+        <a href="noticias.html" data-nav="noticias.html" class="text-gray-300 hover:text-white transition">Noticias</a>
+        <a href="noticias.html?cat=TECNOLOG%C3%8DA" data-nav="noticias.html" class="text-gray-300 hover:text-white transition">Tecnología</a>
+        <a href="favoritos.html" data-nav="favoritos.html" class="text-gray-300 hover:text-white transition">Favoritos</a>
+        <a href="gestion.html" data-nav="gestion.html" class="text-gray-300 hover:text-white transition">Gestión</a>
+        <a href="contacto.html" data-nav="contacto.html" class="text-gray-300 hover:text-white transition">Contacto</a>
       </nav>
-      <div class="flex items-center space-x-4 text-gray-300">
-        <button class="hover:text-white"><i class="fas fa-search"></i></button>
-        <button class="hover:text-white"><i class="far fa-bookmark"></i></button>
+      <div class="flex items-center space-x-4 text-gray-300 shrink-0">
+        <button type="button" id="itn-boton-buscar" class="hover:text-white" aria-label="Buscar noticias">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </button>
+        <a href="favoritos.html" class="hover:text-white" aria-label="Ver mis favoritos">
+          <i class="far fa-bookmark" aria-hidden="true"></i>
+        </a>
+        <button type="button" id="itn-boton-menu" class="md:hidden hover:text-white" aria-label="Abrir el menú de navegación" aria-expanded="false" aria-controls="itn-menu">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Banner / Hero Section -->
-  <section class="bg-slate-900 text-white py-16 px-6 text-center border-b border-slate-800">
-    <div class="container mx-auto max-w-4xl">
-      <span class="text-xs font-bold tracking-widest text-blue-400 uppercase bg-blue-950 border border-blue-800 px-3 py-1 rounded-full">
-        EL PORTAL DEL MAÑANA, HOY
-      </span>
-      <h2 class="text-3xl md:text-5xl font-extrabold mt-6 leading-tight">
-        Explorando las fronteras de la computación cuántica y la inteligencia artificial
-      </h2>
-      <p class="mt-4 text-gray-300 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-        Bienvenido a InfoTech News. Tu fuente definitiva de periodismo tecnológico riguroso, análisis profundo de la industria de semiconductores y los últimos descubrimientos científicos del ecosistema digital.
-      </p>
-      <div class="mt-8 flex justify-center items-center space-x-4">
-        <a href="noticias.html" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-lg text-sm transition">
-          Explorar Noticias &rarr;
-        </a>
-        <button class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-medium px-6 py-2.5 rounded-lg text-sm transition">
-          Suscribirse
-        </button>
+  <!-- Sección de bienvenida (hero): antetítulo, titular, llamados a la acción -->
+  <section class="bg-slate-900 text-white py-16 px-6 border-b border-slate-800">
+    <div class="container mx-auto grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="text-xs font-bold tracking-widest text-blue-400 uppercase bg-blue-950 border border-blue-800 px-3 py-1 rounded-full">
+          EL PORTAL DEL MAÑANA, HOY
+        </span>
+        <h1 class="itn-titular text-3xl md:text-5xl font-extrabold mt-6 leading-tight">
+          Explorando las fronteras de la computación cuántica y la inteligencia artificial
+        </h1>
+        <p class="mt-4 text-gray-300 text-sm md:text-base leading-relaxed">
+          Bienvenido a InfoTech News. Tu fuente definitiva de periodismo
+          tecnológico riguroso, análisis profundo de la industria de
+          semiconductores y los últimos descubrimientos científicos del
+          ecosistema digital.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="noticias.html" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-lg text-sm transition">
+            Explorar Noticias &rarr;
+          </a>
+          <a href="contacto.html" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-medium px-6 py-2.5 rounded-lg text-sm transition">
+            Suscribirse
+          </a>
+        </div>
+      </div>
+      <div>
+        <img src="img/noticia-01.jpg" alt="Procesador cuántico iluminado en un laboratorio de investigación"
+             class="w-full h-72 object-cover rounded-xl shadow-lg" width="1200" height="800">
       </div>
     </div>
   </section>
 
-  <!-- Noticias Destacadas -->
-  <main class="container mx-auto px-6 py-12">
-    <div class="flex justify-between items-end mb-8 border-b pb-4">
+  <main id="contenido" class="container mx-auto px-6 py-12">
+    <!-- Noticias destacadas: se renderizan desde data/news.json -->
+    <div class="flex justify-between items-end mb-8 border-b pb-4 gap-4">
       <div>
-        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">ARTÍCULOS DESTACADOS</span>
-        <h3 class="text-2xl font-bold text-slate-900 mt-1">Noticias Destacadas</h3>
+        <span class="itn-etiqueta text-xs font-bold text-blue-600 uppercase">ARTÍCULOS DESTACADOS</span>
+        <h2 class="itn-serif text-2xl font-bold text-slate-900 mt-1">Noticias Destacadas</h2>
       </div>
-      <a href="noticias.html" class="text-blue-600 hover:text-blue-800 font-semibold text-sm flex items-center">
+      <a href="noticias.html" class="text-blue-600 hover:text-blue-800 font-semibold text-sm shrink-0">
         Ver todas &rarr;
       </a>
     </div>
 
     <div id="contenedor-destacados" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Generado dinámicamente -->
+      <!-- Contenido generado por js/pagina-inicio.js -->
     </div>
+
+    <!-- Sección informativa: testimonios de lectores y cifras del proyecto -->
+    <section class="mt-16 pt-10 border-t" aria-labelledby="titulo-testimonios">
+      <div class="mb-8">
+        <span class="itn-etiqueta text-xs font-bold text-blue-600 uppercase">LO QUE DICEN NUESTROS LECTORES</span>
+        <h2 id="titulo-testimonios" class="itn-serif text-2xl font-bold text-slate-900 mt-1">Testimonios de la comunidad</h2>
+        <p class="mt-2 text-sm text-gray-600 leading-relaxed max-w-2xl">
+          Investigadores, docentes y profesionales siguen en InfoTech News la
+          actualidad de la tecnología, la ciencia y la innovación.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <blockquote class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <i class="fas fa-quote-left text-blue-600 text-xl" aria-hidden="true"></i>
+          <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+            Encuentro en un mismo lugar el contexto técnico y el resumen breve que
+            necesito antes de entrar al laboratorio. Los artículos de computación
+            cuántica están bien documentados.
+          </p>
+          <footer class="mt-4 pt-4 border-t border-gray-100">
+            <cite class="not-italic text-sm font-semibold text-slate-900">Laura Méndez</cite>
+            <p class="text-xs text-gray-500">Investigadora en computación cuántica</p>
+          </footer>
+        </blockquote>
+
+        <blockquote class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <i class="fas fa-quote-left text-blue-600 text-xl" aria-hidden="true"></i>
+          <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+            Uso la sección de favoritos para preparar mis clases: guardo las
+            noticias de ciencia y educación durante la semana y las retomo cuando
+            armo el material.
+          </p>
+          <footer class="mt-4 pt-4 border-t border-gray-100">
+            <cite class="not-italic text-sm font-semibold text-slate-900">Andrés Gaitán</cite>
+            <p class="text-xs text-gray-500">Docente de secundaria</p>
+          </footer>
+        </blockquote>
+
+        <blockquote class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <i class="fas fa-quote-left text-blue-600 text-xl" aria-hidden="true"></i>
+          <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+            El filtro por categorías me permite revisar sólo lo comercial en pocos
+            minutos. Es la lectura con la que empiezo la jornada y no me pierdo
+            ningún cambio del sector.
+          </p>
+          <footer class="mt-4 pt-4 border-t border-gray-100">
+            <cite class="not-italic text-sm font-semibold text-slate-900">Carolina Ríos</cite>
+            <p class="text-xs text-gray-500">Gerente de comercio electrónico</p>
+          </footer>
+        </blockquote>
+      </div>
+
+      <!-- Franja informativa: datos generales del portal -->
+      <div class="mt-8 bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <h3 class="itn-serif text-lg font-bold text-slate-900">InfoTech News en cifras</h3>
+        <dl class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <dt class="itn-etiqueta text-xs font-bold text-blue-600 uppercase">Categorías cubiertas</dt>
+            <dd class="mt-1 text-2xl font-extrabold text-slate-900">6</dd>
+            <dd class="mt-1 text-xs text-gray-500 leading-relaxed">
+              Tecnología, innovación, ciencia, educación, comercial y turismo.
+            </dd>
+          </div>
+          <div>
+            <dt class="itn-etiqueta text-xs font-bold text-blue-600 uppercase">Actualización</dt>
+            <dd class="mt-1 text-2xl font-extrabold text-slate-900">Diaria</dd>
+            <dd class="mt-1 text-xs text-gray-500 leading-relaxed">
+              La portada destaca cada día las noticias más relevantes del momento.
+            </dd>
+          </div>
+          <div>
+            <dt class="itn-etiqueta text-xs font-bold text-blue-600 uppercase">Acceso</dt>
+            <dd class="mt-1 text-2xl font-extrabold text-slate-900">Libre</dd>
+            <dd class="mt-1 text-xs text-gray-500 leading-relaxed">
+              Sin registro: lea, filtre y guarde sus favoritos desde el navegador.
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <p class="mt-6 text-xs text-gray-500">
+        Testimonios ilustrativos con fines académicos.
+      </p>
+    </section>
   </main>
 
-  <!-- Footer exacto de Figma -->
+  <!-- Pie de página: marca, navegación, soporte y datos de contacto -->
   <footer class="bg-slate-900 text-gray-400 py-12 border-t border-slate-800 text-xs md:text-sm">
     <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div>
-        <div class="flex items-center space-x-2 text-white font-bold text-lg mb-4">
-          <span class="text-blue-500">i</span> InfoTech News
-        </div>
-        <p class="leading-relaxed text-gray-400">
-          Análisis independiente, riguroso y diario sobre la vanguardia tecnológica mundial. El punto de encuentro clave para investigadores, ingenieros y líderes de opinión.
+        <p class="flex items-center space-x-2 text-white font-bold text-lg mb-4">
+          <span class="text-blue-500">i</span> <span>InfoTech News</span>
         </p>
+        <p class="leading-relaxed text-gray-400">
+          Análisis independiente, riguroso y diario sobre la vanguardia tecnológica
+          mundial. El punto de encuentro clave para investigadores, ingenieros y
+          líderes de opinión.
+        </p>
+        <div class="flex space-x-4 mt-4 text-gray-400">
+          <a href="#" class="hover:text-white" aria-label="InfoTech News en X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+          <a href="#" class="hover:text-white" aria-label="InfoTech News en LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          <a href="#" class="hover:text-white" aria-label="InfoTech News en YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+        </div>
       </div>
       <div>
-        <h5 class="text-white font-bold mb-3 uppercase tracking-wider">NAVEGACIÓN</h5>
+        <h2 class="text-white font-bold mb-3 uppercase tracking-wider">NAVEGACIÓN</h2>
         <ul class="space-y-2">
           <li><a href="index.html" class="hover:text-white">Inicio</a></li>
           <li><a href="noticias.html" class="hover:text-white">Noticias</a></li>
-          <li><a href="noticias.html?cat=TECNOLOGÍA" class="hover:text-white">Tecnología</a></li>
+          <li><a href="noticias.html?cat=TECNOLOG%C3%8DA" class="hover:text-white">Tecnología</a></li>
           <li><a href="favoritos.html" class="hover:text-white">Favoritos</a></li>
+          <li><a href="gestion.html" class="hover:text-white">Gestión</a></li>
           <li><a href="contacto.html" class="hover:text-white">Contacto</a></li>
         </ul>
       </div>
       <div>
-        <h5 class="text-white font-bold mb-3 uppercase tracking-wider">SOPORTE Y LEGAL</h5>
+        <h2 class="text-white font-bold mb-3 uppercase tracking-wider">SOPORTE Y LEGAL</h2>
         <ul class="space-y-2">
           <li><a href="#" class="hover:text-white">Términos de Servicio</a></li>
           <li><a href="#" class="hover:text-white">Política de Privacidad</a></li>
           <li><a href="#" class="hover:text-white">Configuración de Cookies</a></li>
           <li><a href="#" class="hover:text-white">Preguntas Frecuentes</a></li>
-          <li><a href="#" class="hover:text-white">Ayuda</a></li>
+          <li><a href="contacto.html" class="hover:text-white">Ayuda</a></li>
         </ul>
       </div>
       <div>
-        <h5 class="text-white font-bold mb-3 uppercase tracking-wider">CONTACTO</h5>
+        <h2 class="text-white font-bold mb-3 uppercase tracking-wider">CONTACTO</h2>
         <p class="mb-1">contacto@infotechnews.com</p>
         <p class="mb-1">+34 910 123 456</p>
         <p class="text-gray-400">Paseo de la Castellana 95, Planta 14,<br>28046 Madrid, España</p>
       </div>
     </div>
     <div class="container mx-auto px-6 mt-8 pt-6 border-t border-slate-800 text-center text-gray-500">
-      &copy; 2026 InfoTech News. Todos los derechos reservados.
+      &copy; <span id="itn-anio">2026</span> InfoTech News. Todos los derechos reservados.
     </div>
   </footer>
 
-  <script>
-    fetch('news.json')
-      .then(res => res.json())
-      .then(data => {
-        const contenedor = document.getElementById('contenedor-destacados');
-        const destacados = data.filter(n => n.destacado);
-        contenedor.innerHTML = '';
-        destacados.forEach(noticia => {
-          contenedor.innerHTML += `
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col justify-between">
-              <div>
-                <img src="${noticia.imagen}" alt="${noticia.titulo}" class="w-full h-48 object-cover">
-                <div class="p-5">
-                  <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">${noticia.categoria}</span>
-                  <h4 class="text-base font-bold text-slate-900 mt-2 leading-snug">${noticia.titulo}</h4>
-                  <p class="text-gray-600 text-xs mt-2 leading-relaxed">${noticia.resumen}</p>
-                </div>
-              </div>
-              <div class="p-5 pt-0">
-                <p class="text-gray-400 text-xs mb-3">${noticia.tiempo}</p>
-                <div class="flex justify-between items-center pt-3 border-t border-gray-100">
-                  <button onclick="guardarFavorito(${noticia.id})" class="text-gray-400 hover:text-yellow-500 text-xs transition">
-                    <i class="far fa-bookmark mr-1"></i> Favoritos
-                  </button>
-                  <a href="detalle.html?id=${noticia.id}" class="text-blue-600 font-semibold text-xs hover:underline">
-                    Ver más &rarr;
-                  </a>
-                </div>
-              </div>
-            </div>
-          `;
-        });
-      });
-
-    function guardarFavorito(id) {
-      let favs = JSON.parse(localStorage.getItem('favoritos')) || [];
-      if (!favs.includes(id)) {
-        favs.push(id);
-        localStorage.setItem('favoritos', JSON.stringify(favs));
-        alert('Noticia guardada en Favoritos');
-      } else {
-        alert('Esta noticia ya está en tus favoritos');
-      }
-    }
-  </script>
+  <script defer src="js/almacenamiento.js"></script>
+  <script defer src="js/repositorio.js"></script>
+  <script defer src="js/tarjetas.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/pagina-inicio.js"></script>
 </body>
 </html>

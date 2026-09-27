@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Formulario de contacto de InfoTech News: escríbanos y le responderemos en un plazo de 48 horas.">
-  <title>InfoTech News - Contacto</title>
+  <meta name="description" content="Gestión de noticias: cree nuevas publicaciones, elimine las existentes y restaure los datos originales.">
+  <title>InfoTech News - Gestión de noticias</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
@@ -41,112 +41,104 @@
     </div>
   </header>
 
-  <!-- Miga de pan y título de la página -->
+  <!-- Miga de pan y título de la gestión -->
   <div class="bg-white border-b py-6">
     <div class="container mx-auto px-6">
       <nav class="text-xs text-gray-400 mb-2" aria-label="Miga de pan">
         <a href="index.html" class="hover:text-gray-600">Inicio</a> &gt;
-        <span class="text-gray-600">Contacto</span>
+        <span class="text-gray-600">Gestión</span>
       </nav>
-      <h1 class="itn-serif text-3xl font-bold text-slate-900">Contacto</h1>
+      <h1 class="itn-serif text-3xl font-bold text-slate-900">Gestión de noticias</h1>
+      <p class="text-sm text-gray-500 mt-2">
+        Cree nuevas noticias y elimine las existentes. Los cambios se guardan en
+        este navegador y se pueden deshacer con «Restaurar datos originales».
+      </p>
     </div>
   </div>
 
   <main id="contenido" class="container mx-auto px-6 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Alta de noticias: formulario validado antes de guardar -->
+    <section class="mb-12" aria-labelledby="titulo-crear">
+      <h2 id="titulo-crear" class="itn-serif text-xl font-bold text-slate-900 mb-4">Crear una noticia</h2>
 
-      <!-- Formulario de contacto: lo valida js/pagina-contacto.js, que consume
-           las reglas de js/validacion.js -->
-      <section class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8" aria-labelledby="titulo-formulario">
-        <h2 id="titulo-formulario" class="itn-serif text-2xl font-bold text-slate-900 mb-2">Escríbanos</h2>
-        <p class="text-sm text-gray-600 mb-6">
-          Todos los campos son obligatorios. Revisamos cada mensaje y le respondemos
-          en un plazo de 48 horas.
-        </p>
+      <!-- Confirmación de alta: la escribe js/pagina-gestion.js tras guardar -->
+      <div id="aviso-creacion" class="itn-aviso itn-aviso--exito mb-6" role="status" hidden></div>
 
-        <!-- Confirmación del envío: el texto lo escribe el controlador y sólo
-             aparece tras un envío válido -->
-        <p id="itn-confirmacion" class="itn-aviso itn-aviso--exito hidden mb-6 text-sm font-medium" role="status"></p>
+      <!-- Aviso de fallo al guardar: lo escribe js/pagina-gestion.js -->
+      <div id="aviso-error-formulario" class="itn-aviso itn-aviso--error mb-6" role="alert" aria-live="polite" hidden></div>
 
-        <!-- novalidate: la validación visible es la de JavaScript, no la del
-             navegador, que además da por bueno un correo como "a@b" -->
-        <form id="itn-formulario-contacto" novalidate>
-          <div class="mb-5">
-            <label for="nombre" class="block text-sm font-medium text-slate-900 mb-1.5">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" autocomplete="name"
-                   aria-describedby="error-nombre"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition focus:border-blue-600"
-                   placeholder="Ana García Pérez">
-            <p id="error-nombre" class="itn-error-campo" role="alert" aria-live="polite"></p>
-          </div>
+      <form id="formulario-noticia" novalidate
+            class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="md:col-span-2">
+          <label for="campo-titulo" class="block text-sm font-semibold text-slate-900 mb-1">Título (obligatorio)</label>
+          <input type="text" id="campo-titulo" name="titulo" data-campo="titulo"
+                 class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                 aria-describedby="ayuda-titulo error-titulo">
+          <p id="ayuda-titulo" class="text-xs text-gray-500 mt-1">Entre 10 y 120 caracteres.</p>
+          <p id="error-titulo" class="itn-error-campo" role="alert" aria-live="polite"></p>
+        </div>
 
-          <div class="mb-5">
-            <label for="correo" class="block text-sm font-medium text-slate-900 mb-1.5">Correo electrónico</label>
-            <input type="email" id="correo" name="correo" autocomplete="email"
-                   aria-describedby="error-correo"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition focus:border-blue-600"
-                   placeholder="nombre@dominio.com">
-            <p id="error-correo" class="itn-error-campo" role="alert" aria-live="polite"></p>
-          </div>
+        <div>
+          <label for="campo-categoria" class="block text-sm font-semibold text-slate-900 mb-1">Categoría (obligatoria)</label>
+          <!-- Las opciones se derivan de los datos en js/pagina-gestion.js -->
+          <select id="campo-categoria" name="categoria" data-campo="categoria"
+                  class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                  aria-describedby="ayuda-categoria error-categoria">
+            <option value="">Seleccione una categoría</option>
+          </select>
+          <p id="ayuda-categoria" class="text-xs text-gray-500 mt-1">Las categorías salen de las noticias publicadas.</p>
+          <p id="error-categoria" class="itn-error-campo" role="alert" aria-live="polite"></p>
+        </div>
 
-          <div class="mb-5">
-            <label for="asunto" class="block text-sm font-medium text-slate-900 mb-1.5">Asunto</label>
-            <input type="text" id="asunto" name="asunto"
-                   aria-describedby="error-asunto"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition focus:border-blue-600"
-                   placeholder="Sugerencia sobre una noticia">
-            <p id="error-asunto" class="itn-error-campo" role="alert" aria-live="polite"></p>
-          </div>
+        <div>
+          <label for="campo-imagen" class="block text-sm font-semibold text-slate-900 mb-1">URL de la imagen (opcional)</label>
+          <input type="url" id="campo-imagen" name="imagen" data-campo="imagen"
+                 class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                 aria-describedby="ayuda-imagen error-imagen">
+          <p id="ayuda-imagen" class="text-xs text-gray-500 mt-1">Debe empezar por http:// o https://. Si la deja vacía se usa la imagen por defecto.</p>
+          <p id="error-imagen" class="itn-error-campo" role="alert" aria-live="polite"></p>
+        </div>
 
-          <!-- Sin maxlength: el límite se comprueba en JavaScript para que la
-               persona vea el motivo en lugar de que el navegador corte el texto -->
-          <div class="mb-6">
-            <label for="mensaje" class="block text-sm font-medium text-slate-900 mb-1.5">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="6"
-                      aria-describedby="error-mensaje"
-                      class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm transition focus:border-blue-600"
-                      placeholder="Cuéntenos en qué podemos ayudarle (mínimo 20 caracteres)."></textarea>
-            <p id="error-mensaje" class="itn-error-campo" role="alert" aria-live="polite"></p>
-          </div>
+        <div class="md:col-span-2">
+          <label for="campo-resumen" class="block text-sm font-semibold text-slate-900 mb-1">Resumen (obligatorio)</label>
+          <textarea id="campo-resumen" name="resumen" data-campo="resumen" rows="2"
+                    class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                    aria-describedby="ayuda-resumen error-resumen"></textarea>
+          <p id="ayuda-resumen" class="text-xs text-gray-500 mt-1">Entre 20 y 300 caracteres. Es la frase que se lee en la tarjeta.</p>
+          <p id="error-resumen" class="itn-error-campo" role="alert" aria-live="polite"></p>
+        </div>
 
+        <div class="md:col-span-2">
+          <label for="campo-contenido" class="block text-sm font-semibold text-slate-900 mb-1">Contenido (obligatorio)</label>
+          <textarea id="campo-contenido" name="contenido" data-campo="contenido" rows="8"
+                    class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                    aria-describedby="ayuda-contenido error-contenido"></textarea>
+          <p id="ayuda-contenido" class="text-xs text-gray-500 mt-1">Mínimo 50 caracteres. Separe los párrafos con una línea en blanco.</p>
+          <p id="error-contenido" class="itn-error-campo" role="alert" aria-live="polite"></p>
+        </div>
+
+        <div class="md:col-span-2">
           <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-lg text-sm transition">
-            Enviar mensaje
+            <i class="fas fa-plus mr-1" aria-hidden="true"></i> Publicar noticia
           </button>
-        </form>
-      </section>
+        </div>
+      </form>
+    </section>
 
-      <!-- Información de contacto visible: los mismos datos del pie de página -->
-      <aside class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8" aria-labelledby="titulo-datos">
-        <h2 id="titulo-datos" class="itn-serif text-xl font-bold text-slate-900 mb-5">Información de contacto</h2>
-        <ul class="space-y-5 text-sm text-gray-600">
-          <li class="flex items-start gap-3">
-            <i class="fas fa-envelope text-blue-600 mt-1" aria-hidden="true"></i>
-            <span>
-              <span class="block font-medium text-slate-900">Correo electrónico</span>
-              <a href="mailto:contacto@infotechnews.com" class="hover:text-blue-600 transition">contacto@infotechnews.com</a>
-            </span>
-          </li>
-          <li class="flex items-start gap-3">
-            <i class="fas fa-phone text-blue-600 mt-1" aria-hidden="true"></i>
-            <span>
-              <span class="block font-medium text-slate-900">Teléfono</span>
-              <a href="tel:+34910123456" class="hover:text-blue-600 transition">+34 910 123 456</a>
-            </span>
-          </li>
-          <li class="flex items-start gap-3">
-            <i class="fas fa-location-dot text-blue-600 mt-1" aria-hidden="true"></i>
-            <span>
-              <span class="block font-medium text-slate-900">Dirección</span>
-              Paseo de la Castellana 95, Planta 14,<br>28046 Madrid, España
-            </span>
-          </li>
-        </ul>
-        <p class="mt-6 pt-6 border-t border-gray-100 text-xs text-gray-500">
-          Tiempo de respuesta estimado: 48 horas.
-        </p>
-      </aside>
+    <!-- Listado completo con acción de eliminar y restauración de los datos -->
+    <section aria-labelledby="titulo-listado">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6">
+        <h2 id="titulo-listado" class="itn-serif text-xl font-bold text-slate-900">Noticias publicadas</h2>
+        <button type="button" id="boton-restaurar"
+                class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition self-start sm:self-auto">
+          <i class="fas fa-arrow-rotate-left mr-1" aria-hidden="true"></i> Restaurar datos originales
+        </button>
+      </div>
 
-    </div>
+      <div id="contenedor-gestion" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Tarjetas generadas por js/pagina-gestion.js -->
+      </div>
+    </section>
   </main>
 
   <!-- Pie de página: marca, navegación, soporte y datos de contacto -->
@@ -200,8 +192,11 @@
     </div>
   </footer>
 
+  <script defer src="js/almacenamiento.js"></script>
+  <script defer src="js/repositorio.js"></script>
+  <script defer src="js/tarjetas.js"></script>
   <script defer src="js/validacion.js"></script>
   <script defer src="js/layout.js"></script>
-  <script defer src="js/pagina-contacto.js"></script>
+  <script defer src="js/pagina-gestion.js"></script>
 </body>
 </html>
