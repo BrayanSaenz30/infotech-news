@@ -1,0 +1,175 @@
+/* ==========================================================================
+   styles.css — Reglas propias de InfoTech News
+   Tailwind (CDN) aporta la maquetación y las utilidades. Este archivo define
+   la identidad visual: paleta, tipografía, estados de las tarjetas, avisos y
+   accesibilidad. Nada de esto se resuelve con utilidades sueltas.
+   ========================================================================== */
+
+/* --- Paleta y tokens -----------------------------------------------------
+   Declarados una sola vez. Antes cada página elegía sus colores y contacto
+   acabó en azules distintos al resto del sitio. */
+:root {
+  --itn-superficie-oscura: #0f172a;
+  --itn-superficie-media: #1e293b;
+  --itn-acento: #2563eb;
+  --itn-acento-claro: #3b82f6;
+  --itn-fondo: #f9fafb;
+  --itn-texto: #111827;
+  --itn-texto-suave: #6b7280;
+  --itn-borde: #e5e7eb;
+  --itn-error: #b91c1c;
+  --itn-error-fondo: #fef2f2;
+  --itn-exito: #15803d;
+  --itn-exito-fondo: #f0fdf4;
+  --itn-radio: 0.75rem;
+  --itn-transicion: 180ms ease-in-out;
+}
+
+body {
+  background-color: var(--itn-fondo);
+  color: var(--itn-texto);
+}
+
+/* --- Tipografía ----------------------------------------------------------
+   Los titulares van en serif: es lo que distingue la maquetación aprobada de
+   una plantilla genérica. */
+.itn-serif,
+.itn-titulo-tarjeta,
+.itn-titular {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+
+.itn-etiqueta {
+  letter-spacing: 0.08em;
+}
+
+/* --- Tarjetas ------------------------------------------------------------ */
+.itn-tarjeta {
+  transition: transform var(--itn-transicion), box-shadow var(--itn-transicion);
+}
+
+.itn-tarjeta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+}
+
+/* El resumen se recorta visualmente a tres líneas. El recorte es cosa del CSS:
+   los datos guardan la frase completa. */
+.itn-resumen {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- Avisos, errores y estados vacíos ----------------------------------- */
+.itn-aviso {
+  background-color: #ffffff;
+  border: 1px solid var(--itn-borde);
+  border-radius: var(--itn-radio);
+  padding: 1.25rem;
+}
+
+.itn-aviso--error {
+  background-color: var(--itn-error-fondo);
+  border-color: var(--itn-error);
+  color: var(--itn-error);
+}
+
+.itn-aviso--exito {
+  background-color: var(--itn-exito-fondo);
+  border-color: var(--itn-exito);
+  color: var(--itn-exito);
+}
+
+/* Mensaje de error de un campo de formulario. Se oculta sin display:none para
+   que los lectores de pantalla sigan anunciando los cambios del aria-live. */
+.itn-error-campo {
+  color: var(--itn-error);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  min-height: 1rem;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: var(--itn-error);
+  background-color: var(--itn-error-fondo);
+}
+
+/* --- Accesibilidad ------------------------------------------------------ */
+/* Nunca se elimina el foco: se sustituye por algo más visible. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--itn-acento-claro);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.itn-salto-contenido {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--itn-acento);
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+
+.itn-salto-contenido:focus {
+  left: 0;
+}
+
+/* --- Píldoras de filtro ------------------------------------------------- */
+.itn-pildora {
+  border: 1px solid var(--itn-borde);
+  transition: background-color var(--itn-transicion), color var(--itn-transicion);
+}
+
+.itn-pildora[aria-pressed="true"] {
+  background-color: var(--itn-acento);
+  border-color: var(--itn-acento);
+  color: #ffffff;
+}
+
+/* --- Enlace activo del menú -------------------------------------------- */
+.itn-nav-activo {
+  color: #ffffff;
+  font-weight: 600;
+  border-bottom: 2px solid var(--itn-acento-claro);
+  padding-bottom: 0.25rem;
+}
+
+/* --- Cuerpo del artículo en la vista de detalle ------------------------ */
+.itn-articulo p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+
+/* --- Respeto por la preferencia de movimiento reducido ----------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  .itn-tarjeta {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* --- Impresión --------------------------------------------------------- */
+@media print {
+  header,
+  footer,
+  .itn-sin-imprimir {
+    display: none;
+  }
+
+  body {
+    background: #ffffff;
+  }
+}

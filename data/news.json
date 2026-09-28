@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "titulo": "La supremacía cuántica alcanza una nueva frontera de procesamiento masivo",
+    "categoria": "TECNOLOGÍA",
+    "resumen": "Un equipo internacional de científicos de computación presenta una arquitectura de procesadores cuánticos de temperatura ambiente lista para despliegues comerciales.",
+    "contenido": [
+      "Un consorcio internacional de laboratorios de computación cuántica ha presentado una arquitectura de procesadores capaz de operar a temperatura ambiente, eliminando la necesidad de los sistemas de refrigeración criogénica que hasta ahora limitaban el despliegue de esta tecnología fuera de los centros de investigación.",
+      "El diseño combina qubits de estado sólido con un esquema de corrección de errores que reduce la tasa de fallo por operación en dos órdenes de magnitud frente a la generación anterior. Según el equipo, esto sitúa por primera vez la fiabilidad del sistema dentro del margen que exigen las aplicaciones industriales.",
+      "Los primeros despliegues comerciales se orientan a la simulación de materiales y al diseño de fármacos, dos campos donde los métodos clásicos se topan con un crecimiento exponencial del coste de cálculo. Varias compañías farmacéuticas ya han anunciado acuerdos de acceso anticipado.",
+      "Los autores advierten, sin embargo, que la ventaja cuántica sigue limitada a familias muy concretas de problemas y que la transición hacia un uso general llevará todavía varios años de trabajo."
+    ],
+    "tiempo": "Hace 5 min · 4 min de lectura",
+    "destacado": true,
+    "imagen": "img/noticia-01.jpg",
+    "creditoImagen": "Unsplash"
+  },
+  {
+    "id": 2,
+    "titulo": "Automatización total de fábricas de microprocesadores para mitigar la escasez",
+    "categoria": "INNOVACIÓN",
+    "resumen": "Nuevas redes de robots equipados con visión computacional asumen la cadena de ensamblado de chips semiconductores de última generación.",
+    "contenido": [
+      "Las plantas de fabricación de semiconductores están incorporando redes de robots autónomos que asumen por completo las etapas de ensamblado y verificación, un proceso que hasta ahora requería intervención humana constante en entornos de sala limpia.",
+      "Los sistemas de visión computacional detectan defectos de un tamaño inferior al que el ojo humano puede distinguir, y lo hacen sobre la línea en movimiento, sin detener la producción. La tasa de piezas defectuosas que llegan al final del proceso se ha reducido de forma significativa en las plantas piloto.",
+      "El objetivo declarado es mitigar la escasez estructural de chips que afecta a la automoción y a la electrónica de consumo desde hace varios años. Al eliminar el cuello de botella del personal especializado, las plantas pueden operar de forma continua.",
+      "El debate sobre el impacto laboral sigue abierto: los sindicatos del sector reclaman planes de recualificación antes de que la automatización se extienda a las plantas ya existentes."
+    ],
+    "tiempo": "Hace 2 horas · 6 min de lectura",
+    "destacado": true,
+    "imagen": "img/noticia-02.jpg",
+    "creditoImagen": "Unsplash"
+  },
+  {
+    "id": 3,
+    "titulo": "Nuevos algoritmos inspirados en la biología revolucionan el deep learning",
+    "categoria": "CIENCIA",
+    "resumen": "Un modelo de redes neuronales recursivas que emula la corteza cerebral demuestra un rendimiento energético diez veces superior a los estándares actuales.",
+    "contenido": [
+      "Un grupo de investigación en neurociencia computacional ha publicado una arquitectura de red neuronal recursiva cuyo funcionamiento se inspira directamente en la organización en capas de la corteza cerebral de los mamíferos.",
+      "El modelo procesa la información mediante impulsos discretos en lugar de activaciones continuas, lo que permite que la mayor parte de la red permanezca inactiva en cada ciclo. De ahí proviene la mejora de eficiencia energética, que los autores cifran en un factor de diez frente a las arquitecturas convencionales.",
+      "La reducción del consumo abre la puerta a ejecutar modelos complejos directamente en dispositivos con batería, sin depender de una conexión permanente con centros de datos remotos.",
+      "El trabajo ha sido revisado por pares y el código se ha publicado con licencia abierta, lo que ha permitido que varios laboratorios independientes reproduzcan ya los resultados principales."
+    ],
+    "tiempo": "Hace 1 día · 5 min de lectura",
+    "destacado": true,
+    "imagen": "img/noticia-03.jpg",
+    "creditoImagen": "Unsplash"
+  },
+  {
+    "id": 4,
+    "titulo": "El auge de los chips cuánticos modulares listos para la nube global",
+    "categoria": "TECNOLOGÍA",
+    "resumen": "Nuevas infraestructuras distribuidas permiten interconectar procesadores de qubits directamente con centros de datos tradicionales para acelerar el procesamiento.",
+    "contenido": [
+      "La computación cuántica empieza a ofrecerse como un servicio más dentro del catálogo de los grandes proveedores de nube, mediante módulos de qubits interconectados con la infraestructura clásica existente.",
+      "El planteamiento es híbrido: el procesador cuántico se encarga únicamente de la parte del cálculo donde aporta ventaja, mientras que la preparación de los datos y la interpretación de los resultados siguen ejecutándose en servidores convencionales.",
+      "Para el usuario final la diferencia es mínima, ya que el acceso se realiza a través de las mismas interfaces de programación que cualquier otro servicio gestionado. Esto reduce de forma drástica la barrera de entrada para equipos sin especialistas en física cuántica."
+    ],
+    "tiempo": "Hace 10 min · 5 min de lectura",
+    "destacado": false,
+    "imagen": "img/noticia-04.jpg",
+    "creditoImagen": "Unsplash"
+  },
+  {
+    "id": 5,
+    "titulo": "Inteligencia artificial en las aulas: personalizando la educación del futuro",
+    "categoria": "EDUCACIÓN",
+    "resumen": "Pruebas piloto en toda Europa demuestran un incremento del 35% en la retención académica gracias al uso de tutores cognitivos adaptativos automatizados.",
+    "contenido": [
+      "Varios sistemas educativos europeos han completado la fase piloto de un programa de tutores cognitivos adaptativos, herramientas que ajustan el ritmo y el tipo de ejercicio a la respuesta de cada estudiante.",
+      "Los resultados recogidos durante dos cursos académicos muestran un incremento del 35 % en la retención de los contenidos evaluados a medio plazo, con una mejora especialmente marcada entre el alumnado que partía de un rendimiento más bajo.",
+      "Los responsables del programa insisten en que la herramienta no sustituye al profesorado, sino que le devuelve tiempo: al automatizarse la corrección y el seguimiento individual, el docente puede dedicarse a la intervención pedagógica.",
+      "Quedan por resolver cuestiones de privacidad, dado el volumen de datos de menores que estos sistemas procesan, y de equidad en el acceso entre centros con distinta dotación tecnológica."
+    ],
+    "tiempo": "Hace 4 horas · 6 min de lectura",
+    "destacado": false,
+    "imagen": "img/noticia-05.jpg",
+    "creditoImagen": "Unsplash"
+  },
+  {
+    "id": 6,
+    "titulo": "La digitalización del comercio local a través de plataformas autónomas",
+    "categoria": "COMERCIAL",
+    "resumen": "Pymes en España adoptan sistemas basados en analítica predictiva de demanda para optimizar inventarios en tiempo real y competir con los grandes operadores.",
+    "contenido": [
+      "El pequeño comercio está incorporando plataformas de analítica predictiva que estiman la demanda de cada referencia a partir del histórico de ventas, la estacionalidad y variables del entorno como el clima o los eventos locales.",
+      "El efecto más inmediato se observa en el inventario: los comercios que han adoptado estas herramientas reportan una reducción del capital inmovilizado en stock y una caída notable de las roturas de existencias en los productos de mayor rotación.",
+      "El coste de entrada ha dejado de ser el obstáculo principal, ya que la mayoría de estas plataformas se ofrecen por suscripción mensual y no requieren instalación ni personal técnico dedicado."
+    ],
+    "tiempo": "Hace 6 horas · 6 min de lectura",
+    "destacado": false,
+    "imagen": "img/noticia-06.jpg",
+    "creditoImagen": "Unsplash"
+  },
+  {
+    "id": 7,
+    "titulo": "Turismo inmersivo y realidad extendida redefinen las experiencias de viaje",
+    "categoria": "TURISMO",
+    "resumen": "Cadenas hoteleras globales despliegan gemelos digitales avanzados para que los usuarios experimenten sus resorts antes de reservar su estancia definitiva.",
+    "contenido": [
+      "Las principales cadenas hoteleras han comenzado a publicar gemelos digitales de sus establecimientos: réplicas tridimensionales navegables que permiten recorrer habitaciones y zonas comunes antes de completar una reserva.",
+      "La motivación es comercial y verificable: los operadores que han incorporado esta tecnología registran una reducción de las cancelaciones y de las reclamaciones por discrepancia entre lo anunciado y lo encontrado.",
+      "El siguiente paso anunciado por el sector es la integración de estas réplicas con los sistemas de reserva, de modo que el usuario pueda seleccionar una habitación concreta y no únicamente una categoría.",
+      "Las asociaciones de consumidores piden que estas representaciones se sometan a criterios de veracidad equivalentes a los de la publicidad convencional."
+    ],
+    "tiempo": "Hace 1 día · 7 min de lectura",
+    "destacado": false,
+    "imagen": "img/noticia-07.jpg",
+    "creditoImagen": "Unsplash"
+  }
+]
