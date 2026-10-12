@@ -210,6 +210,30 @@ de cada imagen se indica en el campo `creditoImagen` del registro
 correspondiente en `data/news.json`, y allí es donde debe quedar el nombre del
 fotógrafo una vez confirmado.
 
+## Implementación Híbrida en Angular (Entrega 3 — Semana 7)
+
+Para satisfacer el requerimiento oficial de la Entrega 3 (*«Implementación básica en Angular: componentes y binding»*), el proyecto incorpora una aplicación modular en **Angular 19 (Standalone Components)** ubicada en `angular/` y compilada en `app/`.
+
+- **Enrutamiento por Hash (`withHashLocation`):** Catálogo (`#/catalogo`), Detalle de noticia (`#/detalle/:id`) y Favoritos (`#/favoritos`).
+- **Data Binding implementado:**
+  - *Interpolación (`{{ }}`):* Textos, titulares, tiempos y contadores en plantillas.
+  - *Property Binding (`[ ]`):* Atributos `[src]`, `[alt]`, accesibilidad `[attr.aria-pressed]`, clases dinámicas `[class]`.
+  - *Event Binding (`( )`):* Selección de píldoras `(click)` y alternancia de favoritos `(toggleFavorito)`.
+  - *Two-way Binding (`[(ngModel)]`):* Buscador de noticias reactivo en tiempo real.
+  - *Control Flow (`@for`, `@if`):* Iteración de categorías/tarjetas y estados condicionales de error/carga.
+  - *Comunicación de Componentes (`@Input()`, `@Output()`):* En `NoticiaCardComponent`.
+- **Interoperabilidad:** `NoticiasService` y `FavoritosService` comparten la misma semilla (`data/news.json`) y las mismas claves de `localStorage` (`itn.favoritos`, `itn.noticias.creadas`, `itn.noticias.eliminadas`).
+
+### Comandos de desarrollo y compilación de Angular:
+```bash
+cd angular
+npm test          # Ejecuta pruebas unitarias (11 specs en ChromeHeadless)
+npm run build:pages # Compila directamente a la carpeta /app con base-href /infotech-news/app/
+```
+
+Para consultar la documentación completa de la arquitectura y la tabla detallada de bindings, consulte [`angular/README.md`](angular/README.md).
+
 ## Repositorio
 
 <https://github.com/BrayanSaenz30/infotech-news>
+

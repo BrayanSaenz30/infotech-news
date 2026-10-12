@@ -1,0 +1,55 @@
+<article class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col hover:shadow-md transition">
+  <!-- Property binding en src y alt -->
+  <a [routerLink]="['/detalle', noticia.id]" class="block relative aspect-video overflow-hidden bg-slate-900 group">
+    <img
+      [src]="resolverImagen(noticia.imagen)"
+      [alt]="noticia.titulo"
+      class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+      loading="lazy"
+    >
+    <span class="absolute top-3 left-3 bg-blue-600 text-white text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow">
+      <!-- Interpolación de categoría -->
+      {{ noticia.categoria }}
+    </span>
+  </a>
+
+  <div class="p-5 flex-1 flex flex-col justify-between">
+    <div>
+      <div class="flex items-center text-xs text-gray-500 mb-2">
+        <i class="far fa-clock mr-1" aria-hidden="true"></i>
+        <!-- Interpolación del tiempo de lectura -->
+        <span>{{ noticia.tiempo }} de lectura</span>
+      </div>
+
+      <h3 class="itn-serif text-lg font-bold text-slate-900 mb-2 hover:text-blue-600 transition">
+        <a [routerLink]="['/detalle', noticia.id]">
+          <!-- Interpolación del título -->
+          {{ noticia.titulo }}
+        </a>
+      </h3>
+
+      <p class="text-sm text-gray-600 line-clamp-3 mb-4 leading-relaxed">
+        <!-- Interpolación del resumen -->
+        {{ noticia.resumen }}
+      </p>
+    </div>
+
+    <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+      <a [routerLink]="['/detalle', noticia.id]" class="text-xs font-semibold text-blue-600 hover:text-blue-800 transition">
+        Leer más &rarr;
+      </a>
+
+      <!-- Event binding (click) y property binding [attr.aria-pressed] -->
+      <button
+        type="button"
+        (click)="onToggleFavorito($event)"
+        [attr.aria-pressed]="esFavorito"
+        [class]="esFavorito ? 'text-blue-600 font-semibold' : 'text-gray-400 hover:text-blue-600'"
+        class="text-xs transition flex items-center"
+      >
+        <i [class]="esFavorito ? 'fas fa-bookmark mr-1' : 'far fa-bookmark mr-1'" aria-hidden="true"></i>
+        <span>{{ esFavorito ? 'Guardado' : 'Favoritos' }}</span>
+      </button>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,115 @@
+<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Botón de regreso -->
+  <div class="mb-6">
+    <a routerLink="/catalogo" class="text-xs font-semibold text-blue-600 hover:text-blue-800 transition inline-flex items-center">
+      &larr; Volver al catálogo
+    </a>
+  </div>
+
+  <!-- Estado: Cargando -->
+  @if (cargando) {
+    <div class="text-center py-20 bg-white rounded-xl border border-gray-200">
+      <i class="fas fa-spinner fa-spin text-3xl text-blue-600 mb-3" aria-hidden="true"></i>
+      <p class="text-sm text-gray-600">Cargando artículo...</p>
+    </div>
+  }
+
+  <!-- Estados de Error -->
+  @if (!cargando && tipoError) {
+    <div class="bg-white rounded-xl border border-gray-200 p-8 text-center max-w-xl mx-auto shadow-sm">
+      <div class="w-12 h-12 mx-auto bg-amber-100 text-amber-700 rounded-full flex items-center justify-center text-xl mb-4">
+        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+      </div>
+
+      @if (tipoError === 'invalido') {
+        <h2 class="text-xl font-bold text-slate-900 mb-2">Identificador no válido</h2>
+        <p class="text-sm text-gray-600 mb-6">
+          El parámetro de noticia especificado ("{{ parametroIdCrudo }}") no es un número válido.
+        </p>
+      }
+
+      @if (tipoError === 'no_encontrada') {
+        <h2 class="text-xl font-bold text-slate-900 mb-2">Noticia no encontrada</h2>
+        <p class="text-sm text-gray-600 mb-6">
+          No existe ninguna noticia registrada con el identificador #{{ parametroIdCrudo }}. Puede haber sido eliminada desde la vista de gestión.
+        </p>
+      }
+
+      @if (tipoError === 'fallo_carga') {
+        <h2 class="text-xl font-bold text-slate-900 mb-2">Error de comunicación</h2>
+        <p class="text-sm text-gray-600 mb-6">
+          No se pudo consultar el archivo de datos del proyecto. Asegúrese de servir la aplicación vía HTTP.
+        </p>
+      }
+
+      <a routerLink="/catalogo" class="inline-block px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg text-xs hover:bg-blue-700 transition">
+        Regresar al catálogo
+      </a>
+    </div>
+  }
+
+  <!-- Contenido del Artículo -->
+  @if (!cargando && noticia) {
+    <article class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden p-6 sm:p-10">
+      <!-- Metadatos de Cabecera -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div class="flex items-center space-x-3 text-xs">
+          <span class="bg-blue-600 text-white font-bold uppercase tracking-wider px-2.5 py-1 rounded">
+            {{ noticia.categoria }}
+          </span>
+          <span class="text-gray-500 flex items-center">
+            <i class="far fa-clock mr-1" aria-hidden="true"></i> {{ noticia.tiempo }} de lectura
+          </span>
+          @if (noticia.creada) {
+            <span class="bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded text-[11px]">
+              Creada por usuario
+            </span>
+          }
+        </div>
+
+        <!-- Botón de favorito con Event Binding (click) y Property Binding [attr.aria-pressed] -->
+        <button
+          type="button"
+          (click)="toggleFavorito()"
+          [attr.aria-pressed]="esFavorito"
+          [class]="esFavorito ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100'"
+          class="text-xs px-3 py-1.5 rounded-lg border font-semibold flex items-center transition"
+        >
+          <i [class]="esFavorito ? 'fas fa-bookmark text-blue-600 mr-1.5' : 'far fa-bookmark mr-1.5'" aria-hidden="true"></i>
+          <span>{{ esFavorito ? 'Guardada en favoritos' : 'Agregar a favoritos' }}</span>
+        </button>
+      </div>
+
+      <!-- Titular con Interpolación {{ }} -->
+      <h1 class="itn-serif text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight mb-4">
+        {{ noticia.titulo }}
+      </h1>
+
+      <!-- Resumen / Lead -->
+      <p class="text-base sm:text-lg text-gray-600 font-medium leading-relaxed mb-8 border-l-4 border-blue-600 pl-4 bg-slate-50 py-3 rounded-r">
+        {{ noticia.resumen }}
+      </p>
+
+      <!-- Imagen Destacada -->
+      <figure class="mb-8 rounded-xl overflow-hidden bg-slate-900 border border-gray-100">
+        <img
+          [src]="resolverImagen(noticia.imagen)"
+          [alt]="noticia.titulo"
+          class="w-full max-h-[460px] object-cover"
+        >
+        @if (noticia.creditoImagen) {
+          <figcaption class="p-2.5 bg-slate-900/90 text-right text-xs text-gray-400">
+            Crédito: {{ noticia.creditoImagen }}
+          </figcaption>
+        }
+      </figure>
+
+      <!-- Cuerpo del Artículo usando @for -->
+      <div class="itn-articulo text-gray-800 text-base leading-relaxed space-y-4 border-t border-gray-100 pt-6">
+        @for (parrafo of noticia.contenido; track $index) {
+          <p>{{ parrafo }}</p>
+        }
+      </div>
+    </article>
+  }
+</section>

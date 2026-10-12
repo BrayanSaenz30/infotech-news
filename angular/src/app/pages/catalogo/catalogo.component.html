@@ -1,0 +1,120 @@
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Cabecera de la sección -->
+  <div class="mb-8">
+    <div class="flex items-center space-x-2 text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">
+      <span class="bg-blue-100 px-2 py-0.5 rounded">Módulo Angular</span>
+      <span>&bull;</span>
+      <span>Componentes y Data Binding</span>
+    </div>
+    <h1 class="itn-serif text-3xl md:text-4xl font-extrabold text-slate-900">
+      Catálogo de Noticias
+    </h1>
+    <p class="text-gray-600 mt-2 text-sm md:text-base">
+      Exploración dinámica con filtrado reactivo, enlaces tipados y persistencia sincronizada.
+    </p>
+  </div>
+
+  <!-- Controles: Buscador [(ngModel)] y Píldoras de Categoría -->
+  <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm mb-8 space-y-4">
+    <!-- Buscador con Two-way Data Binding [(ngModel)] -->
+    <div>
+      <label for="buscador-angular" class="block text-xs font-bold uppercase text-gray-700 tracking-wider mb-1">
+        Búsqueda por texto (Two-way binding [(ngModel)])
+      </label>
+      <div class="relative">
+        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" aria-hidden="true"></i>
+        <input
+          id="buscador-angular"
+          type="search"
+          [(ngModel)]="terminoBusqueda"
+          placeholder="Buscar por título o resumen..."
+          class="w-full pl-9 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+        >
+      </div>
+    </div>
+
+    <!-- Píldoras de categorías generadas desde los datos -->
+    <div>
+      <span class="block text-xs font-bold uppercase text-gray-700 tracking-wider mb-2">
+        Filtrar por categoría:
+      </span>
+      <div class="flex flex-wrap gap-2">
+        <button
+          type="button"
+          (click)="seleccionarCategoria('todas')"
+          [class]="categoriaSeleccionada === 'todas' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'"
+          class="text-xs px-3 py-1.5 rounded-full border font-medium transition"
+        >
+          Todas
+        </button>
+
+        @for (cat of categorias; track cat) {
+          <button
+            type="button"
+            (click)="seleccionarCategoria(cat)"
+            [class]="categoriaSeleccionada === cat.toLowerCase() ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'"
+            class="text-xs px-3 py-1.5 rounded-full border font-medium transition"
+          >
+            {{ cat }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de estado y conteo de resultados con Interpolación {{ }} -->
+  <div class="flex items-center justify-between mb-6 pb-2 border-b border-gray-200 text-sm">
+    <div class="text-gray-600">
+      Mostrando <span class="font-bold text-slate-900">{{ noticiasFiltradas.length }}</span> de <span class="font-bold text-slate-900">{{ noticias.length }}</span> noticias disponibles
+    </div>
+    @if (terminoBusqueda) {
+      <div class="text-xs text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">
+        Filtro activo: "{{ terminoBusqueda }}"
+      </div>
+    }
+  </div>
+
+  <!-- Estado de Carga -->
+  @if (cargando) {
+    <div class="text-center py-16 bg-white rounded-xl border border-gray-200">
+      <i class="fas fa-spinner fa-spin text-3xl text-blue-600 mb-3" aria-hidden="true"></i>
+      <p class="text-sm text-gray-600">Cargando noticias desde el servicio...</p>
+    </div>
+  }
+
+  <!-- Mensaje de Error -->
+  @if (mensajeError) {
+    <div class="p-4 bg-red-50 border border-red-200 rounded-xl text-red-800 text-sm flex items-start space-x-3">
+      <i class="fas fa-triangle-exclamation mt-0.5" aria-hidden="true"></i>
+      <div>
+        <p class="font-bold">Error al cargar datos</p>
+        <p class="mt-1">{{ mensajeError }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- Grilla de Noticias con @for y @if -->
+  @if (!cargando && !mensajeError) {
+    @if (noticiasFiltradas.length > 0) {
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (item of noticiasFiltradas; track item.id) {
+          <!-- Uso de componente reutilizable con @Input y @Output -->
+          <app-noticia-card
+            [noticia]="item"
+            [esFavorito]="esFavorito(item.id)"
+            (toggleFavorito)="onToggleFavorito($event)"
+          />
+        }
+      </div>
+    } @else {
+      <!-- Estado vacío cuando no hay coincidencias -->
+      <div class="text-center py-16 bg-white rounded-xl border border-dashed border-gray-300">
+        <i class="far fa-folder-open text-4xl text-gray-400 mb-3" aria-hidden="true"></i>
+        <h3 class="text-lg font-bold text-slate-800">No se encontraron noticias</h3>
+        <p class="text-sm text-gray-500 mt-1 max-w-md mx-auto">
+          No hay artículos que coincidan con los criterios seleccionados. Pruebe cambiando la categoría o limpiando el buscador.
+        </p>
+      </div>
+    }
+  }
+</section>
