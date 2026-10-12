@@ -40,19 +40,22 @@ Compila el módulo Angular generando los archivos directamente en la carpeta `/a
 npm run build:pages
 ```
 
-### 2.3 Desarrollo y Prueba Local (Dev Loop)
-Dado que la aplicación Angular consume el archivo de datos original (`../data/news.json`) y las imágenes del sitio (`../img/`), se debe servir desde la raíz del repositorio:
-1. En una terminal, mantenga el build en modo escucha (opcional):
+### 2.3 Desarrollo y Prueba Local
+La aplicación se compila con `--base-href /infotech-news/app/` y consume `../data/news.json` y `../img/`, por lo que el servidor debe ejecutarse desde la carpeta que **contiene** el repositorio `infotech-news` (no desde dentro de él):
+1. En una terminal, desde `angular/`, mantenga el build en modo escucha (opcional). Pase el mismo `base href`; sin él, `npm run watch` escribe `<base href="/">` en `app/` y la página queda en blanco:
    ```bash
-   cd angular && npm run watch
+   npm run watch -- --base-href /infotech-news/app/
    ```
-2. En otra terminal, levante el servidor HTTP nativo desde la **raíz del proyecto**:
+2. En otra terminal, desde `angular/`, suba a la carpeta que contiene el repositorio:
    ```bash
+   cd ../..   # carpeta que contiene infotech-news/
    python3 -m http.server 8000
    ```
 3. Abra en su navegador:
-   - Sitio Vanilla principal: `http://localhost:8000/`
-   - Versión Angular: `http://localhost:8000/app/`
+   - Sitio Vanilla principal: `http://localhost:8000/infotech-news/`
+   - Versión Angular: `http://localhost:8000/infotech-news/app/`
+
+> Si el servidor se levanta desde dentro del repositorio, la página Angular queda en blanco (el `base href` no coincide). `ng serve` tampoco sirve para probarla: no puede cargar `../data/news.json`.
 
 ---
 

@@ -231,6 +231,15 @@ npm test          # Ejecuta pruebas unitarias (11 specs en ChromeHeadless)
 npm run build:pages # Compila directamente a la carpeta /app con base-href /infotech-news/app/
 ```
 
+### Ejecución local de la versión Angular
+La compilación usa `--base-href /infotech-news/app/`, así que el servidor debe levantarse desde la carpeta que **contiene** el repositorio:
+
+```
+python3 -m http.server 8000
+```
+
+y abrir <http://localhost:8000/infotech-news/> (sitio Vanilla) y <http://localhost:8000/infotech-news/app/> (Angular). Servido desde dentro del repositorio, la página Angular queda en blanco; `ng serve` tampoco funciona porque no puede cargar `../data/news.json`.
+
 Para consultar la documentación completa de la arquitectura y la tabla detallada de bindings, consulte [`angular/README.md`](angular/README.md).
 
 ## Repositorio
