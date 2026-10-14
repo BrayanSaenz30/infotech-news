@@ -1,0 +1,4 @@
+/* Estilos específicos de la tarjeta de noticia (si requiere extensión de Tailwind) */
+:host {
+  display: block;
+}

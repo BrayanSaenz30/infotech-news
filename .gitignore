@@ -25,3 +25,8 @@ node_modules/
 *.temp
 *.bak
 *~
+
+# Angular subproyecto
+angular/node_modules/
+angular/.angular/
+
